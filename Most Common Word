@@ -1,0 +1,30 @@
+class Solution {
+public:
+    string mostCommonWord(string para, vector<string>& banned) {
+        unordered_map<string,int>ban;
+        for(int i=0;i<banned.size();i++)
+                ban[banned[i]]++;
+        
+        int freq=0;
+        string ans="";
+        unordered_map<string,int>mp;
+        for(int i=0;i<para.size();i++)
+        {
+            string word="";
+            while(i<para.size() && isalpha(para[i]))
+            {
+                para[i]=tolower(para[i]);
+                word.push_back(para[i]);
+                i++;
+            }
+            if(ban.find(word)==ban.end() && word!="")
+                mp[word]++;
+            if(freq<mp[word])
+            {
+                freq=mp[word];
+                ans=word;
+            }
+        }
+        return ans;
+    }
+};
